@@ -17,7 +17,6 @@ Player::Player(sf::RenderWindow &window, double xPos, double yPos, double jumpSp
 	time = 6;
 	health = 6;
 	speedOrigin = this->jumpSpeed;
-	//boundBox;
 }
 
 void Player::move(vector<Terrain> stuff, vector<Terrain> &enemies)
@@ -235,4 +234,19 @@ void Player::drawPlayer(sf::RenderWindow &window)
 int Player::getHealth()
 {
 	return health;
+}
+
+void Player::setHealth(int change)
+{
+	health += change;
+}
+
+void Player::setXPosition(int change)
+{
+	xPos += change;
+}
+
+sf::FloatRect Player::getBoundBox()
+{
+	return boundBox;
 }

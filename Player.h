@@ -34,6 +34,10 @@ public:
 	void move(vector<Terrain> stuff, vector<Terrain> &enemies);
 	void drawPlayer(sf::RenderWindow &window);
 	int getHealth();
+	sf::FloatRect getBoundBox();
+	void setHealth(int change);
+	void setXPosition(int change);
+
 };
 
 #endif

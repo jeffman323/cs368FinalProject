@@ -8,56 +8,16 @@
 
 using namespace std;
 
-void createBackground(vector<Terrain> &background) {
-	Terrain piece1(0, -435, "ground.png" );
-	Terrain piece2(60, -435, "ground.png" );
-	Terrain piece3(120, -435, "ground.png" );
-	Terrain piece4(180, -435, "ground.png" );
-	Terrain piece5(240, -435, "ground.png" );
-	background.push_back(piece1);
-	background.push_back(piece2);
-	background.push_back(piece3);
-	background.push_back(piece4);
-	background.push_back(piece5);
-	//background.insert(background.end(), { piece1, piece2, piece3, piece4, piece5 });
-}
-
 int main()
 {
 	//create a window
-	sf::RenderWindow window(sf::VideoMode(1000, 500), "FML it works!");
-	/*
-	//vector for sprite names
-	vector<string> playerSprite = { "p1_walk01.png","p1_walk02.png","p1_walk03.png","p1_walk04.png","p1_walk05.png","p1_walk06.png","p1_walk07.png","p1_walk08.png","p1_walk09.png",
-		"p1_walk10.png", "p1_walk11.png" };
+	sf::RenderWindow window(sf::VideoMode(1000, 500), "Game Window");
 	
-	//index of sprite vector
-	int i = 0;
-	//int for delaying time
-	int delay = 0;
-	//max position onscreen
-	int MAX = 2000;
-	//min position on screen
-	int MIN = 0;
-	//position of the sprite
-	double xpos = 50;
-	double ypos = 450;
-	//base position/floor
-	int basepos = 450;
-	//delays time
-	int time = 0;
-	//jumping speed 
-	double speed = 6;
-	//is the sprite facing right or left
-	bool isRight = true;
-	//is the sprite jumping
-	bool isJump = false;
-	*/
 	Player play(window, 100, 396, 8);
 	vector<Terrain> background;
 	vector<Terrain> badGuyz;
 	vector<Terrain> Healthbar;
-	//createBackground(background);
+
 	Terrain piece1(0, -435, "ground.png");
 	Terrain piece2(-70, -435, "ground.png" );
 	Terrain piece3(-140, -435, "ground.png" );
@@ -146,7 +106,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
+		badGuyz[0].moveEnemy();
 		play.move(background, badGuyz);
 		window.clear();
 		if (play.getHealth() == 0) {
@@ -201,124 +161,7 @@ int main()
 			badGuyz[k].drawTerrain(window);
 		}
 		window.display();
-		
-		/*
-		//move right
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)|| sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		{
-			// right key is pressed: move our character
-			isRight = true;
-			delay++;
-			if (delay > 30)
-			{
-				delay = 0;
-				//determines which picture to use for the sprite
-				i++;
-				if (i >= 11)
-					i = 0;
-			}
-			xpos++;
-			if (xpos >= MAX)
-				xpos--;
-		}
-		//move left
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			// left key is pressed: move our character
-			isRight = false;
-			delay++;
-			if (delay > 30)
-			{
-				delay = 0;
-				//determines which picture to use for the sprite
-				i++;
-				if (i >= 11)
-					i = 0;
-			}
-			xpos--;
-			if (xpos <= MIN)
-				xpos++;
-		}
-		//jump
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		{
-			if (isJump == false)
-				isJump = true;
-		}
-		//create a texture and a sprite
-		sf::Texture texture;
-		sf::Sprite sprite;
-		//if jumping
-		if (isJump)
-		{
-			//load the jumping picture
-			if (!texture.loadFromFile("p1_jump.png"))
-			{
-				// error...
-			}
-			if (isRight)
-			{
-				//set the sprite to jump right
-				sprite.setTexture(texture);
-			}
-			else
-			{
-				//set the sprite to jump left
-				sprite.setTexture(texture);
-				sprite.scale(-1.f, 1.f);
-			}
-			//after time, slow down the jump speed and make the sprite go down
-			time++;
-			if (time >= 3)
-			{
-				time = 0;
-				speed = speed - 0.2;
-
-			}
-			//jump and fall
-			ypos -= speed;
-			//if at the floor, stop jump
-			if (ypos >= basepos)
-			{
-				isJump = false;
-				ypos = basepos;
-				time = 0;
-				speed = 6;
-			}
-		}
-		else
-		{
-			//load sprite from the walking vector
-			if (!texture.loadFromFile(playerSprite[i]))
-			{
-				// error...
-			}
-			if (isRight)
-			{
-				//the sprite goes right
-				sprite.setTexture(texture);
-			}
-			else
-			{
-				//the sprite goes left
-				sprite.setTexture(texture);
-				sprite.scale(-1.f, 1.f);
-			}
-		}
-		//draw the sprite
-		sprite.setOrigin(36, 48);
-		sprite.setPosition(xpos, ypos);
-		sf::Texture back;
-		sf::Sprite background;
-		if (!back.loadFromFile(playerSprite[i]))
-		{
-			// error...
-		}
-		window.clear();
-		window.draw(sprite);
-		window.display();
-		*/
-		
+				
 	}
 
 	return 0;

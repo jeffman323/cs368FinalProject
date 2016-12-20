@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include <iostream>
 
 using namespace std;
 
@@ -7,6 +8,7 @@ Terrain::Terrain(int xPos, int yPos, string picName):xPos(xPos), yPos(yPos), pic
 	{
 		// error...
 	}
+	movement = 1;
 	sprite.setTexture(texture);
 	sprite.setOrigin(xPos, yPos);
 	boundBox = sprite.getGlobalBounds();
@@ -28,4 +30,17 @@ int Terrain::getYPos()
 int Terrain::getXPos()
 {
 	return xPos;
+}
+
+void Terrain::moveEnemy()
+{
+	if (xPos == -740) {
+		movement = -1;
+	}
+	else if (xPos == -940) {
+		movement = 1;
+	}
+	xPos += movement;
+	sprite.setPosition(xPos + 840, yPos + 274);
+	boundBox = sprite.getGlobalBounds();
 }
