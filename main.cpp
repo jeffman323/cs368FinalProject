@@ -106,7 +106,9 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		badGuyz[0].moveEnemy();
+		if (badGuyz.size() != 0) {
+			badGuyz[0].moveEnemy();
+		}
 		play.move(background, badGuyz);
 		window.clear();
 		if (play.getHealth() == 0) {
